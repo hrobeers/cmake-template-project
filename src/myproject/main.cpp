@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <string>
 #include <iostream>
 #include <boost/program_options.hpp>
@@ -48,20 +49,20 @@ int main(int argc, char *argv[])
     po::notify(vm);
 
     // Process the generic options
-    bool exit = false;
+    bool do_exit = false;
     if (vm.count("version")) {
       cout << MAJOR_VERSION << '.'
            << MINOR_VERSION << '.'
            << REVISION << '.'
            << BUILD_NUMBER << '\n'
            << COMMIT_HASH << '\n';
-      exit = true;
+      do_exit = true;
     }
     if (vm.count("help")) {
       showHelp(cmdline_options);
-      exit = true;
+      do_exit = true;
     }
-    if (exit) return 0;
+    if (do_exit) exit(EXIT_SUCCESS);
 
 
     //
@@ -77,11 +78,11 @@ int main(int argc, char *argv[])
       showHelp(cmdline_options, cerr);
     }
 
-    return 0;
+    exit(EXIT_SUCCESS);
   }
   catch (std::exception &ex)
   {
     cerr << ex.what() << endl;
-    return 1;
+    exit(EXIT_FAILURE);
   }
 }
