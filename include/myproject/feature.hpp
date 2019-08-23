@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef MYPROJECT_FEATURE_HPP
+#define MYPROJECT_FEATURE_HPP
+
 #include <string>
 
 namespace myproject
@@ -22,3 +25,5 @@ public:
   std::string work() const;
 };
 }
+
+#endif //MYPROJECT_FEATURE_HPP
