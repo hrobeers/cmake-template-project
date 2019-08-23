@@ -7,9 +7,8 @@ namespace po = boost::program_options;
 #include "../version_autogen.hpp"
 #include "mylib/myfunc.hpp"
 
-using namespace std;
 
-inline void showHelp(const po::options_description &cmdline_options, std::ostream &stream = cout)
+inline void showHelp(const po::options_description &cmdline_options, std::ostream &stream = std::cout)
 {
     stream << cmdline_options << "\n";
 }
@@ -26,7 +25,7 @@ int main(int argc, char *argv[])
 
     po::options_description positional_params;
     positional_params.add_options()
-      ("input-file", po::value<string>(), "Optional input file (can also be provided through stdin)");
+      ("input-file", po::value<std::string>(), "Optional input file (can also be provided through stdin)");
 
 
     //
@@ -51,11 +50,11 @@ int main(int argc, char *argv[])
     // Process the generic options
     bool do_exit = false;
     if (vm.count("version")) {
-      cout << MAJOR_VERSION << '.'
-           << MINOR_VERSION << '.'
-           << REVISION << '.'
-           << BUILD_NUMBER << '\n'
-           << COMMIT_HASH << '\n';
+      std::cout << MAJOR_VERSION << '.'
+                << MINOR_VERSION << '.'
+                << REVISION << '.'
+                << BUILD_NUMBER << '\n'
+                << COMMIT_HASH << '\n';
       do_exit = true;
     }
     if (vm.count("help")) {
@@ -71,18 +70,18 @@ int main(int argc, char *argv[])
 
     if (true)
     {
-        cout << "hello from " << mylib::my_name() << endl;
+      std::cout << "hello from " << mylib::my_name() << std::endl;
     }
     else
     {
-      showHelp(cmdline_options, cerr);
+      showHelp(cmdline_options, std::cerr);
     }
 
     exit(EXIT_SUCCESS);
   }
   catch (std::exception &ex)
   {
-    cerr << ex.what() << endl;
+    std::cerr << ex.what() << std::endl;
     exit(EXIT_FAILURE);
   }
 }
